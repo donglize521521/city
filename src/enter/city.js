@@ -1,6 +1,7 @@
 import { loadFBX } from "../utils";
 import * as THREE from "three";
 import { SurroundLine } from "../effect/surroundLine";
+import { Background } from "../effect/background";
 
 export class City {
   constructor(scene) {
@@ -17,8 +18,14 @@ export class City {
           new SurroundLine(this.scene, child);
         }
       });
+      this.initEffect();
     });
   }
+
+  initEffect() {
+    new Background(this.scene);
+  }
+
   start() {
     //保留
   }
