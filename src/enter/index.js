@@ -49,8 +49,11 @@ export const initCity = () => {
   rederer.setClearColor(new THREE.Color(0x000000), 1);
 
   const city = new City(scene, camera);
+
+  const clock = new THREE.Clock();
+
   const start = () => {
-    city.start();
+    city.start(clock.getDelta());
 
     controls.update();
 
