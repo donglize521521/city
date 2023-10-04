@@ -11,6 +11,10 @@ export class City {
     this.camera = camera;
     this.tweenPosition = null;
     this.tweenRotation = null;
+
+    this.height = {
+      value: 5,
+    };
     this.loadCity();
   }
   loadCity() {
@@ -18,7 +22,7 @@ export class City {
     loadFBX("/src/model/beijing.fbx").then((object) => {
       object.traverse((child) => {
         if (child.isMesh) {
-          new SurroundLine(this.scene, child);
+          new SurroundLine(this.scene, child, this.height);
         }
       });
       this.initEffect();
@@ -107,6 +111,12 @@ export class City {
     if (this.tweenPosition && this.tweenRotation) {
       this.tweenPosition.update();
       this.tweenRotation.update();
+    }
+
+    this.height.value += 0.4;
+
+    if (this.height.value > 160) {
+      this.height.value = 5;
     }
   }
 }

@@ -2,7 +2,8 @@ import * as THREE from "three";
 import { color } from "../config";
 
 export class SurroundLine {
-  constructor(scene, child) {
+  constructor(scene, child, height) {
+    this.height = height;
     this.scene = scene;
     this.child = child;
 
@@ -27,6 +28,11 @@ export class SurroundLine {
     // new THREE.MeshLambertMaterial({ color: "#ff0000" });
     const material = new THREE.ShaderMaterial({
       uniforms: {
+        //当前扫描的高度
+        u_height: this.height,
+        //扫描线条的颜色是什么
+        u_up_color: { value: new THREE.Color(color.risingColor) },
+
         //得需要一个模型颜色 最底部显示的颜色
         u_city_color: { value: new THREE.Color(color.mesh) },
         // 要有一个头部颜色  最顶部显示的颜色
@@ -47,10 +53,19 @@ export class SurroundLine {
         uniform vec3 u_city_color;
         uniform vec3 u_head_color;
         uniform float u_size;
+        
+        uniform vec3  u_up_color;
+        uniform float u_height;
 
         void main(){
           vec3 base_color = u_city_color;
           base_color = mix(base_color, u_head_color, v_position.z/ u_size);
+          //上升线条的高度(+6决定了线条的宽度)
+          if(u_height > v_position.z && u_height < v_position.z + 6.0){
+            // 实现线条模糊的逻辑
+            float f_index = (u_height - v_position.z) / 3.0;
+            base_color = mix(u_up_color, base_color, abs(f_index - 1.0));
+          }
 
           gl_FragColor = vec4(base_color,1.0);
         }
