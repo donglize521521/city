@@ -1,4 +1,10 @@
 <script setup>
+import { onMounted } from 'vue';
+import { initCity }from './enter'
+onMounted(()=>{
+  //初始化三维场景
+  initCity();
+})
 </script>
 
 <template>
