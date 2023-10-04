@@ -1,5 +1,8 @@
 import "../base/index.css"; //清除浏览器默认样式
 import * as THREE from "three";
+import { City } from "./city.js";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+
 export const initCity = () => {
   //获取canvas元素
   const canvas = document.getElementById("webgl");
@@ -14,8 +17,18 @@ export const initCity = () => {
     1,
     100000
   );
-  camera.position.set(0, 0, 10);
+  camera.position.set(1000, 500, 100);
   scene.add(camera);
+
+  //添加相机控件
+  const controls = new OrbitControls(camera, canvas);
+  //是否有惯性
+  controls.enableDamping = true;
+  //是否可以缩放
+  controls.enableZoom = true;
+  //最近和最远距离
+  controls.minDistance = 100;
+  controls.maxDistance = 2000;
 
   //添加灯光
   scene.add(new THREE.AmbientLight(0xadadad));
@@ -35,8 +48,19 @@ export const initCity = () => {
   //设置场景颜色
   rederer.setClearColor(new THREE.Color(0x000000), 1);
 
-  //渲染场景
-  rederer.render(scene, camera);
+  const city = new City(scene);
+  const start = () => {
+    city.start();
+
+    controls.update();
+
+    //渲染场景
+    rederer.render(scene, camera);
+
+    requestAnimationFrame(start);
+  };
+
+  start();
 
   //画布自适应能力
   window.addEventListener("resize", () => {
