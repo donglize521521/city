@@ -48,7 +48,7 @@ export const initCity = () => {
   //设置场景颜色
   rederer.setClearColor(new THREE.Color(0x000000), 1);
 
-  const city = new City(scene);
+  const city = new City(scene, camera);
   const start = () => {
     city.start();
 
