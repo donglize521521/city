@@ -5,6 +5,8 @@ import { SurroundLine } from "../effect/surroundLine";
 import { Background } from "../effect/background";
 import { Radar } from "../effect/radar";
 import { Wall } from "../effect/wall";
+import { Circle } from "../effect/circle";
+
 export class City {
   constructor(scene, camera) {
     console.log(scene);
@@ -38,6 +40,8 @@ export class City {
 
     new Radar(this.scene, this.time);
     new Wall(this.scene, this.time);
+
+    new Circle(this.scene, this.time);
 
     //添加点击选择
     this.addClick();
