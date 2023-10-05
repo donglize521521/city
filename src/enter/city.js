@@ -7,6 +7,7 @@ import { Radar } from "../effect/radar";
 import { Wall } from "../effect/wall";
 import { Circle } from "../effect/circle";
 import { Ball } from "../effect/ball";
+import { Cone } from "../effect/cone";
 
 export class City {
   constructor(scene, camera) {
@@ -19,9 +20,15 @@ export class City {
     this.height = {
       value: 5,
     };
+    this.flag = false;
+    this.top = {
+      value: 0,
+    };
+
     this.time = {
       value: 0,
     };
+
     this.loadCity();
   }
   loadCity() {
@@ -46,6 +53,8 @@ export class City {
     new Circle(this.scene, this.time);
 
     new Ball(this.scene, this.time);
+
+    new Cone(this.scene, this.top, this.height);
 
     //添加点击选择
     this.addClick();
@@ -135,5 +144,10 @@ export class City {
     if (this.height.value > 160) {
       this.height.value = 5;
     }
+
+    if (this.top.value > 15 || this.top.value < 0) {
+      this.flag = !this.flag;
+    }
+    this.top.value += this.flag ? -0.8 : 0.8;
   }
 }
