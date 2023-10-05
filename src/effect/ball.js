@@ -1,22 +1,35 @@
 import * as THREE from "three";
+import { color } from "../config";
 
-export class Cylinder {
+export class Ball {
   constructor(scene, time) {
     this.scene = scene;
     this.time = time;
+
+    this.createSphere({
+      color: color.ball,
+      height: 60,
+      opacity: 0.6,
+      speed: 4.0,
+      position: {
+        x: 300,
+        y: 0,
+        z: -200,
+      },
+    });
   }
 
-  createCylinder(options) {
-    const geometry = new THREE.CylinderGeometry(
-      options.radius,
-      options.radius,
-      options.height,
+  createSphere(options) {
+    const geometry = new THREE.SphereGeometry(
+      50,
       32,
-      1,
-      options.open
+      32,
+      Math.PI / 2,
+      Math.PI * 2,
+      0,
+      Math.PI / 2
     );
 
-    geometry.translate(0, options.height / 2, 0);
     const material = new THREE.ShaderMaterial({
       uniforms: {
         u_color: {

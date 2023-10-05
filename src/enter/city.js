@@ -6,6 +6,7 @@ import { Background } from "../effect/background";
 import { Radar } from "../effect/radar";
 import { Wall } from "../effect/wall";
 import { Circle } from "../effect/circle";
+import { Ball } from "../effect/ball";
 
 export class City {
   constructor(scene, camera) {
@@ -39,9 +40,12 @@ export class City {
     new Background(this.scene);
 
     new Radar(this.scene, this.time);
+
     new Wall(this.scene, this.time);
 
     new Circle(this.scene, this.time);
+
+    new Ball(this.scene, this.time);
 
     //添加点击选择
     this.addClick();
