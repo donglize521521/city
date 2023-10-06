@@ -8,5 +8,6 @@ export const color = {
   wall: "#fab73f", //光墙的颜色
   circle: "#00bbff", //圆的速度
   ball: "#fab73f", //球的颜色
-  cone: "#ffff00", //锥体的颜色
+  cone: "#ffff00", //四棱锥体的颜色
+  fly: "#ffff00", //飞线
 };
