@@ -11,6 +11,8 @@ import { Cone } from "../effect/cone";
 import { Fly } from "../effect/fly";
 import { Snow } from "../effect/snow";
 
+import { Font } from "../effect/font";
+
 export class City {
   constructor(scene, camera) {
     console.log(scene);
@@ -63,6 +65,8 @@ export class City {
     new Fly(this.scene, this.time);
 
     this.effect.snow = new Snow(this.scene);
+
+    new Font(this.scene);
 
     //添加点击选择
     this.addClick();
