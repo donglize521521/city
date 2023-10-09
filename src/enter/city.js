@@ -9,9 +9,9 @@ import { Circle } from "../effect/circle";
 import { Ball } from "../effect/ball";
 import { Cone } from "../effect/cone";
 import { Fly } from "../effect/fly";
-import { Snow } from "../effect/snow";
-
 import { Font } from "../effect/font";
+import { Snow } from "../effect/snow";
+import { Rain } from "../effect/rain";
 
 export class City {
   constructor(scene, camera) {
@@ -64,7 +64,9 @@ export class City {
 
     new Fly(this.scene, this.time);
 
-    this.effect.snow = new Snow(this.scene);
+    this.effect.rain = new Rain(this.scene);
+
+    // this.effect.snow = new Snow(this.scene);
 
     new Font(this.scene);
 
