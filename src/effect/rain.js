@@ -1,17 +1,35 @@
 import * as THREE from "three";
+import { Points } from "./points";
 
 export class Rain {
   constructor(scene) {
-    this.scene = scene;
+    this.points = new Points(scene, {
+      range: 1000,
+      count: 800,
+      size: 10,
+      opacity: 0.4,
+      url: "../../src/assets/rain.png",
+      setPosition: function (position) {
+        position.speedY += 20;
+      },
+      setAnimation: function (position) {
+        position.y -= 20;
 
-    //范围
-    this.range = 1000;
-    //个数
-    this.count = 800;
+        if (position.y < 0) {
+          position.y = this.range / 2;
+        }
+      },
+    });
+    // this.scene = scene;
+
+    // //范围
+    // this.range = 1000;
+    // //个数
+    // this.count = 800;
 
     this.positionList = [];
 
-    this.init();
+    // this.init();
   }
   init() {
     this.geometry = new THREE.BufferGeometry();
@@ -42,13 +60,14 @@ export class Rain {
   }
 
   animation() {
-    this.positionList.forEach((position) => {
-      position.y -= 20;
-
-      if (position.y < 0) {
-        position.y = this.range / 2;
-      }
-    });
-    this.points.geometry.setFromPoints(this.positionList);
+    this.points.animation();
+    // this.positionList.forEach((position) => {
+    //   this.setAnimation(position);
+    // position.y -= 20;
+    // if (position.y < 0) {
+    //   position.y = this.range / 2;
+    // }
+    // });
+    // this.points.geometry.setFromPoints(this.positionList);
   }
 }

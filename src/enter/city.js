@@ -64,9 +64,9 @@ export class City {
 
     new Fly(this.scene, this.time);
 
-    this.effect.rain = new Rain(this.scene);
+    // this.effect.rain = new Rain(this.scene);
 
-    // this.effect.snow = new Snow(this.scene);
+    this.effect.snow = new Snow(this.scene);
 
     new Font(this.scene);
 
