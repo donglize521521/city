@@ -25,10 +25,13 @@ export const initCity = () => {
   //是否有惯性
   controls.enableDamping = true;
   //是否可以缩放
-  controls.enableZoom = true;
+  //   controls.enableZoom = true;
+  controls.enableZoom = false;
   //最近和最远距离
   controls.minDistance = 100;
   controls.maxDistance = 2000;
+  //开启右键拖动
+  controls.enablePan = true;
 
   //添加灯光
   scene.add(new THREE.AmbientLight(0xadadad));
@@ -48,7 +51,7 @@ export const initCity = () => {
   //设置场景颜色
   rederer.setClearColor(new THREE.Color(0x000000), 1);
 
-  const city = new City(scene, camera);
+  const city = new City(scene, camera, controls);
 
   const clock = new THREE.Clock();
 
